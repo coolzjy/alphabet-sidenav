@@ -1,25 +1,25 @@
-# Í¨Ñ¶Â¼ÑùÊ½µÄ±ßÀ¸×ÖÄ¸µ¼º½
+# é€šè®¯å½•æ ·å¼çš„è¾¹æ å­—æ¯å¯¼èˆª
 
-## ¼ò½é
-´´½¨Ò»¸öÍ¨Ñ¶Â¼±ßÀ¸ÑùÊ½µÄ×ÖÄ¸µ¼º½
+## ç®€ä»‹
+åˆ›å»ºä¸€ä¸ªé€šè®¯å½•è¾¹æ æ ·å¼çš„å­—æ¯å¯¼èˆª
 
-![µ¼º½](https://github.com/coolzjy/alphabet-sidenav/raw/master/contacts.jpg)
+![å¯¼èˆª](https://github.com/coolzjy/alphabet-sidenav/raw/master/contacts.jpg)
 
 ## DEMO
-ÇëÉ¨Ãè¶şÎ¬ÂëÔÚÒÆ¶¯Éè±¸ÉÏ²é¿´
+è¯·æ‰«æäºŒç»´ç åœ¨ç§»åŠ¨è®¾å¤‡å•†æŸ¥çœ‹
 
 ![DEMO](http://zjy.name/lab/alphabet-nav/code.png)
 
-## Ê¹ÓÃ
-µ¼Èë alphabetNav.css ºÍ alphabetNav.js
+## ä½¿ç”¨
+å¯¼å…¥ alphabetNav.css å’Œ alphabetNav.js
 
 ```javascript
 alphabetNav([navItem],{options})
 ```
 
-ÆäÖĞ£¬navItem Îª¶ÔÏóÊı×é£¬¶ÔÏó°üÀ¨ display ºÍ id Á½¸öÊôĞÔ£¬display Îªµ¼º½ÏÔÊ¾Ãû³Æ£¬id Îª¶ÔÓ¦Ò³ÃæÃªµãÃû³Æ
+å…¶ä¸­ï¼ŒnavItem ä¸ºå¯¹è±¡æ•°ç»„ï¼Œå¯¹è±¡åŒ…æ‹¬ display å’Œ id ä¸¤ä¸ªå±æ€§ï¼Œdisplay ä¸ºå¯¼èˆªæ˜¾ç¤ºåç§°ï¼Œid ä¸ºå¯¹åº”é¡µé¢é”šç‚¹åç§°
 
-options ¿ÉÑ¡ÅäÖÃ°üÀ¨ top£ºÊı×Ö»ò×Ö·û´®£¬ÉèÖÃ±ßÀ¸µÄ top ÊôĞÔ£»bottom£ºÊı×Ö»ò×Ö·û´®£¬ÉèÖÃ±ßÀ¸µÄ bottom ÊôĞÔ£»showIndicator£º²¼¶ûĞÍ£¬ÉèÖÃÊÇ·ñÏÔÊ¾×ÖÄ¸Ö¸Ê¾Æ÷¡£
+options å¯é€‰é…ç½®åŒ…æ‹¬ topï¼šæ•°å­—æˆ–å­—ç¬¦ä¸²ï¼Œè®¾ç½®è¾¹æ çš„ top å±æ€§ï¼›bottomï¼šæ•°å­—æˆ–å­—ç¬¦ä¸²ï¼Œè®¾ç½®è¾¹æ çš„ bottom å±æ€§ï¼›showIndicatorï¼šå¸ƒå°”å‹ï¼Œè®¾ç½®æ˜¯å¦æ˜¾ç¤ºå­—æ¯æŒ‡ç¤ºå™¨ã€‚
 
 ```javascript
 alphabetNav([{display:"A", id:"a"},

@@ -7,7 +7,7 @@
 	 * @param {Array} 要添加导航的锚点列表
 	 * @param {Object} 配置选项
 	 * 
-	 * 配置项：top {int|string}、bottom {int|string}、showIndicator {boolean} 
+	 * 配置项：top {int|string}、bottom {int|string}、showIndicator {boolean}、useHash {boolean}
 	 *
 	 */
 	function init(pAnchorList, pOptions){
@@ -90,10 +90,25 @@
 		}
 		
 		function alphabetMove (pPositionY){
-			var currentItem;
+			var currentItem, targetItem;
 			currentItem = d.elementFromPoint(d.body.clientWidth-1, pPositionY);
 			if(!currentItem || currentItem.className.indexOf("alphabet") < 0) return;
-			location.hash = currentItem.getAttribute("to");
+			
+			// 使用 url hash 进行跳转
+			if(typeof pOptions !== "undefined" && 
+					typeof pOptions.useHash !== "undefined" &&
+					pOptions.useHash){
+				location.hash = currentItem.getAttribute("to");
+			}
+			// 不使用 url hash 进行跳转
+			else{
+				targetItem = d.getElementById(currentItem.getAttribute("to"));
+				if(targetItem){
+					d.body.scrollTop += targetItem.getBoundingClientRect().top;
+				}
+			}
+			
+			// 显示指示器
 			if(typeof pOptions === "undefined" ||
 					typeof pOptions.showIndicator === "undefined" ||
 					pOptions.showIndicator){

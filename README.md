@@ -19,7 +19,7 @@ alphabetNav([navItem],{options})
 
 其中，navItem 为对象数组，对象包括 display 和 id 两个属性，display 为导航显示名称，id 为对应页面锚点名称
 
-options 可选配置包括 top：数字或字符串，设置边栏的 top 属性；bottom：数字或字符串，设置边栏的 bottom 属性；showIndicator：布尔型，设置是否显示字母指示器。
+options 可选配置包括 top：数字或字符串，设置边栏的 top 属性；bottom：数字或字符串，设置边栏的 bottom 属性；showIndicator：布尔型，默认值 true，设置是否显示字母指示器；useHash：布尔型，默认值 false，是否使用 URLHash 进行跳转
 
 ```javascript
 alphabetNav([{display:"A", id:"a"},

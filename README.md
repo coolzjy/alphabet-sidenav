@@ -3,7 +3,7 @@
 ## 简介
 创建一个通讯录边栏样式的字母导航
 
-![导航](https://github.com/coolzjy/alphabet-sidenav/raw/master/contacts.jpg)
+![瀵艰埅](https://github.com/coolzjy/alphabet-sidenav/raw/gh-pages/contacts.jpg)
 
 ## DEMO
 请扫描二维码在移动设备上查看

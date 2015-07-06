@@ -1,5 +1,6 @@
 (function(d){
-	var inited = false; // 是否已经初始化
+	var inited = false, // 是否初始化
+		top, bottom, showIndicator = true, useHash = false; // 默认配置
 	
 	/**
 	 * 初始化方法
@@ -27,6 +28,17 @@
 			throw new TypeError("second parameter of alphabet must be an Object");
 		}
 		
+		// 读取配置
+		if(typeof pOptions !== "undefined"){
+			top = pOptions.top;
+			bottom = pOptions.bottom;
+			if(typeof pOptions.showIndicator !== "undefined"){
+				showIndicator = pOptions.showIndicator;
+			}
+			if(typeof pOptions.useHash !== "undefined"){
+				useHash = pOptions.useHash;
+			}
+		}
 		
 		// 新建列表
 		list = myCreateElement("nav", "alphabetList")
@@ -43,25 +55,24 @@
 		}
 		
 		// 处理位置属性
-		if(pOptions && typeof pOptions.top !== "undefined"){
-			if(typeof pOptions.top === "number"){
-				list.style.top = pOptions.top + "px";
+		if(typeof top !== "undefined"){
+			if(typeof top === "number"){
+				list.style.top = top + "px";
 			}
-			if(typeof pOptions.top === "string"){
-				list.style.top = pOptions.top;
-			}
-		}
-		if(pOptions && typeof pOptions.bottom !== "undefined"){
-			if(typeof pOptions.bottom === "number"){
-				list.style.bottom = pOptions.bottom + "px";
-			}
-			if(typeof pOptions.bottom === "string"){
-				list.style.bottom = pOptions.bottom;
+			if(typeof top === "string"){
+				list.style.top = top;
 			}
 		}
-		if(typeof pOptions === "undefined" ||
-				typeof pOptions.top === "undefined" &&
-				typeof pOptions.bottom === "undefined"){
+		if(typeof bottom !== "undefined"){
+			if(typeof bottom === "number"){
+				list.style.bottom = bottom + "px";
+			}
+			if(typeof bottom === "string"){
+				list.style.bottom = bottom;
+			}
+		}
+		if(typeof top === "undefined" &&
+				typeof bottom === "undefined"){
 			list.style.top = "50%";
 			list.style.marginTop = "-" + list.clientHeight/2 + "px";
 		}
@@ -81,9 +92,7 @@
 			alphabetMove(e.changedTouches[0].clientY);
 		});
 
-		if(typeof pOptions === "undefined" ||
-				typeof pOptions.showIndicator === "undefined" ||
-				pOptions.showIndicator){
+		if(showIndicator){
 			list.addEventListener("touchend", function(e){
 				indicator.style.display = "none";
 			});
@@ -95,9 +104,7 @@
 			if(!currentItem || currentItem.className.indexOf("alphabet") < 0) return;
 			
 			// 使用 url hash 进行跳转
-			if(typeof pOptions !== "undefined" && 
-					typeof pOptions.useHash !== "undefined" &&
-					pOptions.useHash){
+			if(useHash){
 				location.hash = currentItem.getAttribute("to");
 			}
 			// 不使用 url hash 进行跳转
@@ -109,9 +116,7 @@
 			}
 			
 			// 显示指示器
-			if(typeof pOptions === "undefined" ||
-					typeof pOptions.showIndicator === "undefined" ||
-					pOptions.showIndicator){
+			if(showIndicator){
 				indicator.innerText = currentItem.innerText;
 				indicator.style.display = "block";
 			}

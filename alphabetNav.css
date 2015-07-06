@@ -2,7 +2,8 @@ nav.alphabetList {
 	position: fixed;
 	right: 0;
 	background: rgba(0,0,0,0.2);
-	border-radius:3px;
+	border-radius: 3px;
+	-webkit-user-select: none;
 }
 nav.alphabetList ul {
 	list-style: none;

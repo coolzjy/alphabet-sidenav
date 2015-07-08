@@ -6,7 +6,7 @@
 	/**
 	 * 初始化方法
 	 *
-	 * @param {Array} 要添加导航的锚点列表
+	 * @param {Array|string} 要添加导航的锚点列表，或要匹配的属性名称
 	 * @param {Object} 配置选项
 	 * 
 	 * 配置项：top {int|string}、bottom {int|string}、showIndicator {boolean}、useHash {boolean}

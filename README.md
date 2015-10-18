@@ -10,10 +10,25 @@
 
 ![DEMO](http://zjy.name/lab/alphabet-nav/code.png)
 
-## ʹ��
-���� alphabetNav.css �� alphabetNav.js
+## 使用
+#### 1.模块化调用
+使用 browserify 或 seajs 等工具，引入alphabetnav
 
-### 调用方式 1（推荐）
+```javascript
+var alphabetNav = require('alphabetnav');
+alphabetNav.alphabetNav("attrName");
+```
+
+#### 2.使用`script`标签全局引用
+
+```html
+<script type="text/javascript" src="script/alphabetNav.js"></script>
+<script type="text/javascript">
+	alphabetNav("attrName");
+</script>
+```
+
+#### 3.方法调用1(推荐)
 
 ```javascript
 alphabetNav("attrName",{options})
@@ -33,7 +48,7 @@ alphabet("nav");
 </script>
 ```
 
-### 调用方式 2
+#### 3.方法调用2
 
 ```javascript
 alphabetNav([navItem],{options})

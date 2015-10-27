@@ -177,5 +177,17 @@
 		return newElement;
 	}
 	
-	e.alphabetNav = init;
-})(document, typeof exports !== 'undefined' ? exports : window);
+	// 支持 AMD CMD 及全局变量的调用模式
+	if(e.define){
+		e.define(function(){
+			return init;
+		})
+	}
+	else if(e.exports){
+		e.exports = init;
+	}
+	else{
+		e.alphabetNav = init;
+	}
+	
+})(document, typeof module !== 'undefined' ? module : window);

@@ -150,7 +150,7 @@
 					targetItem = d.getElementById(currentItem.getAttribute('to'));
 				}
 				if(targetItem){
-					d.body.scrollTop += targetItem.getBoundingClientRect().top;
+					window.scrollBy(0, targetItem.getBoundingClientRect().top);
 				}
 			}
 			

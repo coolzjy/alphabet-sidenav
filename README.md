@@ -1,12 +1,12 @@
-# ͨѶ¼��ʽ�ı�����ĸ����
+# 通讯录样式的边栏字母导航
 
-## ���
-����һ��ͨѶ¼������ʽ����ĸ����
+## 简介
+创建一个通讯录边栏样式的字母导航
 
 ![导航](https://github.com/coolzjy/alphabet-sidenav/raw/gh-pages/contacts.jpg)
 
 ## DEMO
-��ɨ���ά�����ƶ��豸�ϲ鿴
+请扫描二维码在移动设备上查看
 
 ![DEMO](http://zjy.name/lab/alphabet-nav/code.png)
 

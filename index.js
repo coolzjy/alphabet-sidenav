@@ -1,7 +1,8 @@
-(function(d, e){
+void function(d, e){
 	var inited = false, // 是否初始化
-		top, bottom, showIndicator = true, useHash = false, // 默认配置
-		attrKey;
+			attrName, // 属性名
+			top, bottom, // 配置项
+			showIndicator = true, useHash = false; // 拥有默认值的配置项
 	
 	// 动态写入 CSS 代码
 	var style = d.createElement('style');
@@ -16,37 +17,41 @@
 	style.innerHTML += 'margin:-25px  0 0 -25px;font-size:30px;font-weight:bold;line-height:50px;text-align:center;}';
 	d.head.appendChild(style);
 	
-	/**
+	/*
 	 * 初始化方法
 	 *
 	 * @param {Array|string} 要添加导航的锚点列表，或要匹配的属性名称
 	 * @param {Object} 配置选项
 	 * 
 	 * 配置项：top {int|string}、bottom {int|string}、showIndicator {boolean}、useHash {boolean}
-	 *
 	 */
-	function init(pAnchorList, pOptions){
-		var i, list, listUl, listLi, indicator, anchorList;
+	function init(pTarget, pOptions){
+		var i, // 循环变量
+				list, listUl, // 导航列表
+				listLi, // 导航列表项
+				indicator, // 指示器
+				anchorList; // 需要添加导航的页面元素列表
 		
 		// 如果已经初始化过，提醒并返回
 		if(inited){
-			console.warn('alphabetList is already inited');
+			console.warn('alphabetNav has already been inited!');
 			return;
 		}
 		
 		// 检查参数类型
-		if(Object.prototype.toString.call(pAnchorList) !== '[object Array]' &&
-				typeof pAnchorList !== 'string'){
-			throw new TypeError('first parameter of alphabet must be an Array or String');
+		if(Object.prototype.toString.call(pTarget) !== '[object Array]'
+				&& typeof pTarget !== 'string'){
+			throw new TypeError('First parameter of alphabetNav init function must be an Array or String');
 		}
 		if(typeof pOptions !== 'undefined' && typeof pOptions !== 'object'){
-			throw new TypeError('second parameter of alphabet must be an Object');
+			throw new TypeError('Second parameter of alphabetNav init function must be an Object');
 		}
 		
 		// 读取配置
 		if(typeof pOptions !== 'undefined'){
 			top = pOptions.top;
 			bottom = pOptions.bottom;
+
 			if(typeof pOptions.showIndicator !== 'undefined'){
 				showIndicator = pOptions.showIndicator;
 			}
@@ -55,33 +60,33 @@
 			}
 		}
 		
-		// 新建列表
+		// 新建导航条
 		list = myCreateElement('nav', 'alphabetList');
-		d.body.appendChild(list);
 		listUl = myCreateElement('ul');
 		list.appendChild(listUl);
+		d.body.appendChild(list);
 		
-		// 判断调用类型
-		if(typeof pAnchorList === 'string'){
+		// 添加导航项目
+		if(typeof pTarget === 'string'){
 			useHash = false; // 该调用类型下不允许 URL Hash 跳转
-			attrKey = pAnchorList;
+			attrName = pTarget;
 			
 			// 根据传递的参数选择包含指定属性的元素
-			anchorList = d.querySelectorAll('[' + attrKey + ']');
+			anchorList = d.querySelectorAll('[' + attrName + ']');
 			
 			// 添加导航项
 			for(i = 0; i < anchorList.length; i++){
-				listLi = myCreateElement('li', 'alphabet', anchorList[i].getAttribute(attrKey));
+				listLi = myCreateElement('li', 'alphabet', anchorList[i].getAttribute(attrName));
 				listUl.appendChild(listLi);
 			}
 		}
 		else{	
 			// 添加导航项
-			for(i = 0; i < pAnchorList.length; i++){
+			for(i = 0; i < pTarget.length; i++){
 				// 检测数组元素类型
-				if(typeof pAnchorList[i] !== 'object') continue;
-				listLi = myCreateElement('li', 'alphabet', pAnchorList[i].display);
-				listLi.setAttribute('to', pAnchorList[i].id);
+				if(typeof pTarget[i] !== 'object') continue;
+				listLi = myCreateElement('li', 'alphabet', pTarget[i].display);
+				listLi.setAttribute('to', pTarget[i].id);
 				listUl.appendChild(listLi);	
 			}
 		}
@@ -103,15 +108,13 @@
 				list.style.bottom = bottom;
 			}
 		}
-		if(typeof top === 'undefined' &&
-				typeof bottom === 'undefined'){
+		if(typeof top === 'undefined' && typeof bottom === 'undefined'){
 			list.style.top = '50%';
 			list.style.marginTop = '-' + list.clientHeight/2 + 'px';
 		}
 		
 		// 新建指示器
-		indicator = d.createElement('div');
-		indicator.className = 'alphabetIndicator';
+		indicator = myCreateElement('div', 'alphabetIndicator');
 		d.body.appendChild(indicator);
 		
 		//绑定事件
@@ -142,8 +145,8 @@
 			// 不使用 url hash 进行跳转
 			else{
 				// 属性调用模式
-				if(typeof attrKey !== 'undefined'){
-					targetItem = d.querySelector('[' + attrKey + '=\'' +
+				if(typeof attrName !== 'undefined'){
+					targetItem = d.querySelector('[' + attrName + '=\'' +
 							currentItem.innerText + '\']');
 				}
 				else{
@@ -166,6 +169,16 @@
 		inited = true;
 	}
 	
+
+	/*
+	 * 创建元素
+	 *
+	 * @param {string} 标签名
+	 * @param {string} CSS 类名
+	 * @param {string} Inner Text
+	 * 
+	 * @return {HTMLDOMElement} 创建的 HTML 元素
+	 */
 	function myCreateElement(pTagName, pClassName, pInnerText){
 		var newElement = d.createElement(pTagName);
 		if(pClassName){
@@ -177,17 +190,17 @@
 		return newElement;
 	}
 	
-	// 支持 AMD CMD 及全局变量的调用模式
-	if(e.define){
-		e.define(function(){
-			return init;
-		})
+	// AMD/CMD 加载器
+	if(typeof define === 'function'){
+		define(function(){return init;});
 	}
-	else if(e.exports){
-		e.exports = init;
+	// CommonJS 加载器
+	else if(typeof module !== 'undefined' && typeof exports !== 'undefined'){
+		module.exports = init;
 	}
+	// 无模块化加载器，挂载到 window
 	else{
-		e.alphabetNav = init;
+		window.alphabetNav = init;
 	}
 	
-})(document, typeof module !== 'undefined' ? module : window);
+}(document);

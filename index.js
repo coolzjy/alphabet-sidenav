@@ -1,8 +1,8 @@
 void function(d, e){
 	var inited = false, // 是否初始化
-			attrName, // 属性名
-			top, bottom, // 配置项
-			showIndicator = true, useHash = false; // 拥有默认值的配置项
+			list, // 导航条
+			indicator; // 指示器
+
 	
 	// 动态写入 CSS 代码
 	var style = d.createElement('style');
@@ -27,10 +27,12 @@ void function(d, e){
 	 */
 	function init(pTarget, pOptions){
 		var i, // 循环变量
-				list, listUl, // 导航列表
+				anchorList, // 需要添加导航的页面元素列表
+				listUl, // 导航列表
 				listLi, // 导航列表项
-				indicator, // 指示器
-				anchorList; // 需要添加导航的页面元素列表
+				attrName, // 属性名
+				top, bottom, // 配置项
+				showIndicator = true, useHash = false; // 拥有默认值的配置项
 		
 		// 如果已经初始化过，提醒并返回
 		if(inited){
@@ -168,6 +170,15 @@ void function(d, e){
 		// 初始化完毕
 		inited = true;
 	}
+
+	/*
+	 * 卸载方法
+	 */
+	function destroy(){
+		d.body.removeChild(list);
+		d.body.removeChild(indicator);
+		inited = false;
+	}
 	
 
 	/*
@@ -192,15 +203,17 @@ void function(d, e){
 	
 	// AMD/CMD 加载器
 	if(typeof define === 'function'){
-		define(function(){return init;});
+		define(function(){
+			return {init: init, destroy: destroy};
+		});
 	}
 	// CommonJS 加载器
 	else if(typeof module !== 'undefined' && typeof exports !== 'undefined'){
-		module.exports = init;
+		module.exports = {init: init, destroy: destroy};
 	}
 	// 无模块化加载器，挂载到 window
 	else{
-		window.alphabetNav = init;
+		window.alphabetNav = {init: init, destroy: destroy};
 	}
 	
 }(document);

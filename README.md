@@ -12,11 +12,11 @@
 
 ## 使用
 #### 1.模块化调用
-使用 browserify 或 seajs 等工具，引入alphabetnav
+使用 browserify 或 seajs 等模块加载器，引入alphabetnav
 
 ```javascript
 var alphabetNav = require('alphabetnav');
-alphabetNav.alphabetNav("attrName");
+alphabetNav.init("attrName");
 ```
 
 #### 2.使用`script`标签全局引用
@@ -24,14 +24,14 @@ alphabetNav.alphabetNav("attrName");
 ```html
 <script type="text/javascript" src="script/alphabetNav.js"></script>
 <script type="text/javascript">
-	alphabetNav("attrName");
+	alphabetNav.init("attrName");
 </script>
 ```
 
 #### 3.方法调用1(推荐)
 
 ```javascript
-alphabetNav("attrName",{options})
+alphabetNav.init("attrName",{options})
 ```
 
 其中，attrName 为属性名，options 为配置项。元素属性名的对应属性值将作为导航显示内容。该调用方式下 URL Hash 跳转特性不可用。
@@ -44,14 +44,14 @@ DEMO:
 <section nav="Z">
 
 <script type="text/javascript">
-alphabet("nav");
+alphabetNav.init("nav");
 </script>
 ```
 
 #### 3.方法调用2
 
 ```javascript
-alphabetNav([navItem],{options})
+alphabetNav.init([navItem],{options})
 ```
 
 其中，navItem 为对象数组，对象包括 display 和 id 两个属性，display 为导航显示名称，id 为对应页面锚点名称。
@@ -63,7 +63,7 @@ DEMO:
 <section id="c">
 
 <script type="text/javascript">
-alphabet([
+alphabetNav.init([
 		{display:"A", id:"a"},
 		{display:"B", id:"b"},
 		{display:"C", id:"c"}
@@ -76,4 +76,4 @@ options 可选配置包括：
 + top：数字或字符串，设置边栏的 top 属性。
 + bottom：数字或字符串，设置边栏的 bottom 属性，top 和 bottom 均没有配置时，slideNav 将居中显示。
 + showIndicator：布尔型，默认值 true，设置是否显示字母指示器。
-+ useHash：布尔型，默认值 false，是否使用 URLHash 进行跳转。注意使用 URLHash 进行跳转时，只在 URLHash 改变时跳转才会发生，这将导致某些情况下不能跳转到正确位置。
++ useHash：布尔型，默认值 false，是否使用 URLHash 进行跳转。注意使用 URLHash 进行跳转时，只在 URLHash 改变时跳转才会发生，**这将导致某些情况下不能跳转到正确位置**。
